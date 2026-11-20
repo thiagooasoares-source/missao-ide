@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missão Ide — Mateus 28</title>
+  <meta name="description" content="Ide, portanto, e fazei discípulos de todas as nações. Conheça nossas missões e contribua.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>
+    // Tema claro: mesma página, cores trocadas (link com ?tema=claro)
+    if (new URLSearchParams(location.search).get('tema') === 'claro') document.documentElement.dataset.theme = 'claro';
+  </script>
+  <link rel="stylesheet" href="styles.css?v=15">
+</head>
+<body>
+
+  <header class="topbar">
+    <a href="#inicio" class="brand">Missão Ide</a>
+    <nav>
+      <a href="#obra">A obra</a>
+      <a href="#galeria">Missões</a>
+      <a href="#construindo">Projeto</a>
+      <a href="#contribuir" class="btn btn-small">Contribuir</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. Hero -->
+    <section id="inicio" class="hero">
+      <div class="hero-head">
+        <h1 class="headline"><span class="headline-ref">MT 28</span> Ide, portanto, e fazei discípulos de todas as nações</h1>
+        <form class="search" id="search" autocomplete="off">
+          <label for="country" class="sr-only">Digite o nome de um país</label>
+          <div class="combo">
+            <input id="country" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="country-list" placeholder="Escolha ou digite um país">
+            <button type="button" class="combo-toggle" id="country-toggle" tabindex="-1" aria-label="Mostrar países com missões">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 7.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul id="country-list" class="combo-list" role="listbox" aria-label="Países" hidden></ul>
+          </div>
+          <button class="btn" type="submit">Ver missão</button>
+        </form>
+        <p class="hint" aria-live="polite">Arraste o globo para girar. Para zoom: Ctrl + rolagem, pinça ou os botões + e −.</p>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="globe-wrap">
+          <div id="globe" aria-label="Globo terrestre interativo"></div>
+          <div class="zoom" role="group" aria-label="Zoom do globo">
+            <button type="button" id="zoom-in" aria-label="Aproximar">+</button>
+            <button type="button" id="zoom-out" aria-label="Afastar">−</button>
+          </div>
+        </div>
+
+        <aside class="panel" id="panel" aria-live="polite" hidden>
+          <button class="panel-close" id="panel-close" type="button" aria-label="Fechar">×</button>
+          <div class="panel-title">
+            <img id="panel-flag" alt="" width="40" height="30">
+            <h2 id="panel-name"></h2>
+          </div>
+          <p id="panel-summary" class="panel-summary"></p>
+          <div id="panel-photos" class="panel-photos"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 2. Sobre a obra -->
+    <section id="obra" class="section about">
+      <div class="container narrow">
+        <p class="eyebrow reveal">A obra missionária</p>
+        <h2 class="reveal">Levamos o Evangelho onde ele ainda não chegou</h2>
+        <p class="lead reveal">Nossos missionários vivem entre os povos que servem. Plantam igrejas, ensinam a Palavra, formam líderes locais e cuidam de quem tem fome, sede e frio.</p>
+        <div class="about-grid">
+          <article class="reveal">
+            <h3>Pregação e discipulado</h3>
+            <p>Cultos, estudos bíblicos e formação de pastores para que cada igreja caminhe com as próprias pernas.</p>
+          </article>
+          <article class="reveal">
+            <h3>Cuidado com as famílias</h3>
+            <p>Cestas básicas, água potável, atendimento de saúde e educação para crianças.</p>
+          </article>
+          <article class="reveal">
+            <h3>Obras e construção</h3>
+            <p>Templos, escolas e casas missionárias que servem de base para o trabalho por muitos anos.</p>
+          </article>
+        </div>
+        <p class="lead reveal">Esses irmãos dependem de nós. Cada viagem, cada tijolo e cada refeição só acontece porque alguém escolheu contribuir. <strong>Quem não pode ir, pode enviar.</strong></p>
+      </div>
+    </section>
+
+    <!-- 3. Galeria -->
+    <section id="galeria" class="section">
+      <div class="container">
+        <p class="eyebrow reveal">Onde estamos</p>
+        <div class="carousel-head">
+          <h2 class="reveal">Nossas missões pelo mundo</h2>
+          <p class="swipe-hint reveal" aria-hidden="true">Arraste para o lado <span class="swipe-arrow">→</span></p>
+        </div>
+        <div class="gallery carousel" id="gallery"></div>
+        <section class="gallery-detail" id="gallery-detail" aria-live="polite" hidden></section>
+      </div>
+    </section>
+
+    <!-- 4. O que estamos construindo -->
+    <section id="construindo" class="section build">
+      <div class="container">
+        <p class="eyebrow reveal">O que estamos construindo</p>
+        <div class="carousel-head">
+          <h2 class="reveal">Obras em andamento</h2>
+          <p class="swipe-hint reveal" aria-hidden="true">Arraste para o lado <span class="swipe-arrow">→</span></p>
+        </div>
+        <div class="projects carousel" id="projects"></div>
+      </div>
+    </section>
+
+    <!-- 5. Contribuir -->
+    <section id="contribuir" class="section give">
+      <div class="container">
+        <p class="eyebrow reveal">Contribua</p>
+        <h2 class="reveal">Faça parte desta obra</h2>
+        <p class="lead reveal">Escolha como quer contribuir. Toda oferta, de qualquer valor, chega ao campo.</p>
+
+        <div class="give-grid">
+          <article class="give-card pix reveal" data-tier="0">
+            <h3>PIX — qualquer valor</h3>
+            <img id="pix-qr" alt="QR code PIX" width="200" height="200" loading="lazy">
+            <p class="pix-key-label">Chave PIX</p>
+            <p class="pix-key" id="pix-key"></p>
+            <p class="muted" id="pix-receiver"></p>
+            <ul class="benefits"></ul>
+            <button class="btn" id="pix-copy" type="button">Copiar chave</button>
+          </article>
+
+          <article class="give-card reveal" data-tier="1">
+            <h3>Plano Semear</h3>
+            <p class="price">R$ 495</p>
+            <p class="muted">ou 12x de <strong id="p495-inst"></strong></p>
+            <p>Ajuda a manter um missionário no campo e a sustentar o trabalho com as famílias.</p>
+            <ul class="benefits"></ul>
+            <a class="btn" id="p495" target="_blank" rel="noopener">Contribuir com R$ 495</a>
+          </article>
+
+          <article class="give-card featured reveal" data-tier="2">
+            <h3>Plano Edificar</h3>
+            <p class="price">R$ 995</p>
+            <p class="muted">ou 12x de <strong id="p995-inst"></strong></p>
+            <p>Acelera as obras de construção, como a casa missionária, e a formação de líderes.</p>
+            <ul class="benefits"></ul>
+            <a class="btn" id="p995" target="_blank" rel="noopener">Contribuir com R$ 995</a>
+          </article>
+
+          <article class="give-card reveal" data-tier="3">
+            <h3>Plano Enviar</h3>
+            <p class="price price-sm">Acima de R$ 995</p>
+            <p class="muted">Valor combinado com você</p>
+            <p>Para quem deseja adotar um projeto ou contribuir com um valor maior. Fale com a gente.</p>
+            <ul class="benefits"></ul>
+            <a class="btn btn-outline" id="whatsapp" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>“Como pregarão, se não forem enviados?” — Romanos 10:15</p>
+    <p class="muted">© Missão Ide</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/globe.gl@2"></script>
+  <script src="data.js?v=15"></script>
+  <script src="app.js?v=15"></script>
+</body>
+</html>
